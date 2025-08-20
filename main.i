@@ -1,9 +1,11 @@
-# 0 "cvec.c"
+# 0 "main.c"
 # 0 "<built-in>"
 # 0 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 0 "<command-line>" 2
-# 1 "cvec.c"
+# 1 "main.c"
+
+# 1 "cvec.h" 1
 # 1 "/usr/include/assert.h" 1 3 4
 # 35 "/usr/include/assert.h" 3 4
 # 1 "/usr/include/features.h" 1 3 4
@@ -56,7 +58,7 @@ extern void __assert (const char *__assertion, const char *__file, int __line)
 
 
 
-# 2 "cvec.c" 2
+# 2 "cvec.h" 2
 # 1 "/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h" 1 3 4
 # 145 "/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h" 3 4
 typedef long int ptrdiff_t;
@@ -70,7 +72,7 @@ typedef struct {
   long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
 # 436 "/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h" 3 4
 } max_align_t;
-# 3 "cvec.c" 2
+# 3 "cvec.h" 2
 # 1 "/usr/include/stdio.h" 1 3 4
 # 28 "/usr/include/stdio.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
@@ -844,7 +846,7 @@ extern int __uflow (FILE *);
 extern int __overflow (FILE *, int);
 # 983 "/usr/include/stdio.h" 3 4
 
-# 4 "cvec.c" 2
+# 4 "cvec.h" 2
 # 1 "/usr/include/stdlib.h" 1 3 4
 # 26 "/usr/include/stdlib.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h" 1 3 4
@@ -1945,26 +1947,27 @@ extern int getloadavg (double __loadavg[], int __nelem)
 # 1156 "/usr/include/stdlib.h" 2 3 4
 # 1167 "/usr/include/stdlib.h" 3 4
 
-# 5 "cvec.c" 2
-# 36 "cvec.c"
+# 5 "cvec.h" 2
+# 3 "main.c" 2
 
-# 36 "cvec.c"
+
+# 4 "main.c"
 typedef struct { size_t capacity; size_t length; int *values; } (Ints) ; Ints Ints_new() { return (Ints){ .capacity = 32, .length = 0, .values = malloc(32 * sizeof(int)) }; } void Ints_realloc(Ints *v) { size_t new_cap = v->capacity == 0 ? 32 : v->capacity * 2; v->values = realloc(v->values, new_cap * sizeof(*v->values)); 
-# 36 "cvec.c" 3 4
+# 4 "main.c" 3 4
 ((void) sizeof ((
-# 36 "cvec.c"
+# 4 "main.c"
 v->values != 
-# 36 "cvec.c" 3 4
+# 4 "main.c" 3 4
 ((void *)0)) ? 1 : 0), __extension__ ({ if (
-# 36 "cvec.c"
+# 4 "main.c"
 v->values != 
-# 36 "cvec.c" 3 4
+# 4 "main.c" 3 4
 ((void *)0)) ; else __assert_fail (
-# 36 "cvec.c"
+# 4 "main.c"
 "v->values != NULL"
-# 36 "cvec.c" 3 4
-, "cvec.c", 36, __extension__ __PRETTY_FUNCTION__); }))
-# 36 "cvec.c"
+# 4 "main.c" 3 4
+, "main.c", 4, __extension__ __PRETTY_FUNCTION__); }))
+# 4 "main.c"
 ; v->capacity = new_cap; } void Ints_append(Ints *v, int n) { if (v->capacity == v->length) Ints_realloc(v); v->values[v->length++] = n; }
 
 int main(void) {

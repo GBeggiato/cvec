@@ -2,13 +2,13 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pedantic -std=c99
 
 BIN = cvec
-MAIN = cvec.c
+MAIN = main.c
 
 $(BIN): $(MAIN)
-	$(CC) $(CFLAGS) $(MAIN) -o $(BIN)
+	$(CC) $(CFLAGS) $(MAIN) cvec.h -o $(BIN)
 
 clean:
 	rm -f $(BIN)
 
 expand:
-	$(CC) -E $(MAIN) -o cvec.i
+	$(CC) -E $(MAIN) -o main.i
