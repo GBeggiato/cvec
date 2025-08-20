@@ -29,7 +29,8 @@ int main(void) {
     Points points = Points_new();
     for (size_t i = 0; i < 50; ++i){
         // append
-        Points_append(&points, (Point){.x = (double)i, .y = (double)i});
+        Point p = (Point){.x = (double)i, .y = (double)i};
+        Points_append(&points, p);
         // access single elements
         if (i < 5) {
             if (i & 1) printf("%zu) x: %lf\n", i+1, points.values[i].x);
