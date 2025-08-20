@@ -1,3 +1,16 @@
+
+# CVEC
+
+**basic** <generic> dynamic array in C
+
+### NOTE
+- it works but it's just an experiment
+- surely there are blind corners that are waiting to bite back
+
+## example
+
+```c
+
 #include <stdio.h>
 
 #include "cvec.h"
@@ -7,7 +20,7 @@ typedef struct {
     double x, y;
 } Point;
 
-// create the methods here
+// this creates the methods
 // (TypeOfElement, NameOfContainer + Prefix)
 CVEC_IMPL_DA(Point, Points)
 
@@ -16,8 +29,7 @@ int main(void) {
     Points points = Points_new();
     for (size_t i = 0; i < 50; ++i){
         // append
-        Point p = (Point){.x = (double)i, .y = (double)i};
-        Points_append(&points, p);
+        Points_append(&points, (Point){.x = (double)i, .y = (double)i});
         // access single elements
         if (i < 5) {
             if (i & 1) printf("%zu) x: %lf\n", i+1, points.values[i].x);
@@ -30,4 +42,4 @@ int main(void) {
     // don't forget to free
     Points_free(&points);
 }
-
+```
