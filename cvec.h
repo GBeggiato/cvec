@@ -5,6 +5,10 @@
 #ifndef CVEC_H_
 #define CVEC_H_
 
+
+// implements the dynamic array, the "new", "append", "realloc", "free"
+// functions for the provided type (elem_type) and assigns a struct name / prefix
+// to all of them (struct_name)
 #define CVEC_IMPL_DA(elem_type, struct_name) \
  \
 typedef struct { \
@@ -38,5 +42,13 @@ void struct_name##_append(struct_name *v, elem_type n) { \
 void struct_name##_free(struct_name *v) { \
     free(v->values); \
 } \
+
+// python index notation: negative numbers go back from the end of the array
+#define CVEC_DA_AT(vec, i) (vec)->values[ \
+    assert((vec)->length > 0), \
+    (i) < 0 ? ((vec)->length+(i)) : (size_t)(i) \
+] \
+
+#define CVEC_DA_LAST(vec) CVEC_DA_AT(vec, -1)
 
 #endif // CVEC_H_
