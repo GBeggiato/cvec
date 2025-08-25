@@ -2,36 +2,30 @@
 
 #include "cvec.h"
 
-// some user-defined struct
-typedef struct {
-    double x, y;
-} Point;
+// you can just create the struct
+CVEC_STRUCT(int, Nums)
 
-void Point_printf(Point* p){
-    printf("(%lf, %lf)\n", p->x, p->y);
-}
-
-// create the methods here
-// (TypeOfElement, NameOfContainer + Prefix)
-CVEC_IMPL_DA(Point, Points)
+// or get the "new" and "append" functions implemented as well
+CVEC_IMPL_DA(float, Reals)
 
 int main(void) {
-    // get a container
-    Points points = Points_new();
-    for (int i = 0; i < 50; ++i){
-        // append
-        Point p = (Point){.x = (double)i, .y = (double)i};
-        Points_append(&points, p);
-        // access single elements
-        if (i < 5) {
-            if (i & 1) printf("%d) x: %lf\n", i+1, CVEC_DA_AT(&points, i).x);
-            else printf("%d) y: %lf\n", i+1, CVEC_DA_LAST(&points).y);
-        }
-        if (i == 14 || i == 33)
-            printf("%d elements were added and capacity is: %zu\n", i + 1, points.capacity);
-    }
 
-    // don't forget to free
-    Points_free(&points);
+    // in this case you have to 0-initialize and use the macros
+    Nums nums = {0};
+    CVEC_APPEND(&nums, 2);
+    CVEC_APPEND(&nums, 4);
+    CVEC_APPEND(&nums, 3);
+    for (int i = 0; i < 3; ++i) printf("%d) %d\n", i, CVEC_DA_AT(&nums, i));
+    CVEC_FREE(&nums);
+
+    // you can use the specifi functions in the second case
+    Reals reals = Reals_new();
+    for (int i = 1; i < 4; ++i) {
+        Reals_append(&reals, 1.1 * i);
+        printf("%d) %f\n", i, CVEC_DA_LAST(&reals));
+    }
+    // free is a macro anyway, as you should use it only once
+    CVEC_FREE(&reals);
+
 }
 
